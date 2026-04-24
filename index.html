@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MH PREMIER LEAGUE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <section class="intro" id="intro">
+    <div class="intro-content">
+      <h1 class="intro-title">MH PREMIER LEAGUE</h1>
+      <img class="intro-trophy" src="images/trophy.png" alt="Trophy" />
+    </div>
+  </section>
+
+  <div class="app">
+    <header class="site-header" id="siteHeader">
+      <div class="header-title title">MH PREMIER LEAGUE</div>
+    </header>
+
+    <main>
+      <section class="view active" id="homeView">
+        <div class="panel center home-container">
+          <h1>MH PREMIER LEAGUE</h1>
+
+          <div class="admin-trigger-wrap admin-actions">
+            <div class="admin-only" data-admin-display="block" id="adminModeLabel" style="display:none;">ADMIN MODE ACTIVE</div>
+            <button class="btn admin-btn admin-login" id="adminLoginBtn" onclick="loginAdmin()">Admin Login</button>
+            <button class="btn admin-btn secondary admin-only" data-admin-display="inline-flex" id="adminLogoutBtn" type="button" style="display:none;" onclick="logoutAdmin()">Logout</button>
+            <button class="btn admin-btn admin-only" data-admin-display="inline-flex" id="editPlayerPointsBtn" type="button">Edit Team Scores</button>
+            <button class="btn admin-btn admin-only" data-admin-display="inline-flex" id="editPlayerScoresBtn" type="button" onclick="openPlayerEditor()">Edit Player Scores</button>
+          </div>
+          <div class="admin-controls admin-only" data-admin-display="flex" id="adminControlsBar" style="display:none;">
+            <button class="btn admin-btn admin-only" data-admin-display="inline-flex" id="leagueLockBtn" type="button" onclick="toggleLeagueLock()">Lock League</button>
+          </div>
+
+          <div class="image-row">
+            <div class="img-box">
+              <img src="images/logo.png" class="logo-img" alt="Logo" />
+            </div>
+            <div class="img-box">
+              <img src="images/trophy.png" class="trophy-img" alt="Trophy" />
+            </div>
+          </div>
+
+          <div class="menu-buttons button-container buttons-container">
+            <button class="btn main-btn" id="openLeaderboardBtn">Leaderboard</button>
+            <button class="btn secondary main-btn" id="ownersBtn">Meet Our Owners</button>
+            <button class="btn main-btn" id="openTeamsBtn">Team Scores</button>
+            <button class="btn main-btn" id="openAllTeamsBtn" onclick="openAllTeams()">All Teams</button>
+          </div>
+
+          <div class="partners-band" id="partner-ticker">
+            <div class="ticker-content">
+              OFFICIAL PARTNERS: MSJ TEXTILES • LV FRAMES • SPHHERE ECOM • PAVITRA ENTERPRISES • NM GOLD • BR TRADERS • MAHADIVYA TEXTILES • MAGIC LIFESTYLE
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="teamListView">
+        <div class="panel">
+          <div class="back-wrap">
+            <button class="btn back-btn" id="backFromTeamsBtn"><span class="arrow">←</span><span>Back</span></button>
+          </div>
+          <h3 class="view-title">Team Scores</h3>
+          <div class="team-grid" id="teamGrid"></div>
+        </div>
+      </section>
+
+      <section class="view" id="teamDetailView">
+        <div class="panel">
+          <div class="back-wrap">
+            <button class="btn back-btn" id="backFromDetailBtn"><span class="arrow">←</span><span>Back</span></button>
+          </div>
+          <div class="team-hero" id="teamHero"></div>
+          <div class="captain-section" id="captainSection"></div>
+          <div class="players-list" id="playersList"></div>
+          <div class="team-total" id="teamTotalBox">FINAL TEAM POINTS: 0</div>
+        </div>
+      </section>
+
+      <section class="view" id="leaderboardView">
+        <div class="panel">
+          <div class="back-wrap">
+            <button class="btn back-btn" id="backFromLeaderboardBtn"><span class="arrow">←</span><span>Back</span></button>
+          </div>
+          <h3 class="view-title">Live Leaderboard</h3>
+          <div class="leaderboard-list" id="leaderboardList"></div>
+        </div>
+      </section>
+
+      <section class="view" id="ownersView">
+        <div class="panel owners-panel">
+          <div class="back-wrap">
+            <button class="btn back-btn" id="backFromOwnersBtn"><span class="arrow">←</span><span>Back</span></button>
+          </div>
+          <h3 class="view-title">Meet Our Owners</h3>
+          <div class="owners-carousel carousel-container">
+            <button class="owners-nav carousel-btn left" id="ownersPrevBtn" type="button" aria-label="Previous owner">&lt;</button>
+            <div class="owners-track carousel-track" id="ownersTrack">
+              <article class="owner-card side-card" id="ownerPrevCard"></article>
+              <article class="owner-card active-card active" id="ownerActiveCard"></article>
+              <article class="owner-card side-card" id="ownerNextCard"></article>
+            </div>
+            <button class="owners-nav carousel-btn right" id="ownersNextBtn" type="button" aria-label="Next owner">&gt;</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="allTeamsView">
+        <div class="panel">
+          <div class="back-wrap">
+            <button class="btn back-btn" type="button" onclick="goHome()"><span class="arrow">←</span><span>Back</span></button>
+          </div>
+          <div class="teams-container">
+            <img src="images/teams.png" alt="All Teams" class="teams-image" />
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal" id="adminModal">
+    <div class="modal-card">
+      <div class="modal-top">
+        <div class="modal-title">Admin Login</div>
+        <button class="icon-btn" id="closeAdminModalBtn" aria-label="Close">✕</button>
+      </div>
+      <div class="field">
+        <label for="adminUsername">Username</label>
+        <input id="adminUsername" type="text" autocomplete="username" />
+      </div>
+      <div class="field">
+        <label for="adminPassword">Password</label>
+        <input id="adminPassword" type="password" autocomplete="current-password" />
+      </div>
+      <button class="btn" id="submitAdminLoginBtn">Login</button>
+      <button class="btn admin-only" data-admin-display="block" id="lockLeagueBtn" type="button" style="display:none; margin-top:10px;" onclick="toggleLeagueLock()">Lock League</button>
+      <button class="btn secondary admin-only" data-admin-display="block" id="unlockLeagueBtn" type="button" style="display:none; margin-top:10px;" onclick="toggleLeagueLock()">Unlock League</button>
+      <div class="status-msg" id="adminStatusMsg"></div>
+    </div>
+  </div>
+
+  <div class="modal" id="adminEditModal">
+    <div class="modal-card wide">
+      <div class="modal-top">
+        <div class="modal-title">Edit Player Points</div>
+        <button class="icon-btn" id="closeAdminEditBtn" aria-label="Close">✕</button>
+      </div>
+      <div class="admin-edit-scroll" id="adminEditList"></div>
+      <button class="btn" id="savePlayerStatsBtn" type="button">Save Changes</button>
+    </div>
+  </div>
+
+  <div class="modal" id="playerEditor">
+    <div class="modal-card wide">
+      <div class="modal-top">
+        <div class="modal-title">Edit Player Scores</div>
+        <button class="icon-btn" id="closePlayerEditorBtn" aria-label="Close">✕</button>
+      </div>
+      <div class="admin-edit-scroll" id="playerList"></div>
+      <div class="admin-actions">
+        <button class="btn" id="savePlayerScoresBtn" type="button">Save</button>
+        <button class="btn secondary" id="closePlayerEditorActionBtn" type="button">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/firebase-sync.js"></script>
+  <script src="js/team.js"></script>
+  <script src="js/leaderboard.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/owners.js"></script>
+  <script src="js/main.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDHL82LeL1F3oJF23fSdqlVBHiPzV3xbQI",
+      authDomain: "mhpl-81199.firebaseapp.com",
+      projectId: "mhpl-81199",
+      storageBucket: "mhpl-81199.firebasestorage.app",
+      messagingSenderId: "137643474478",
+      appId: "1:137643474478:web:e4e6afed86e962915f69bf"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    window.db = db;
+
+    window.onload = () => {
+      if (typeof window.loadDataFromFirebase === "function") {
+        window.loadDataFromFirebase();
+      }
+    };
+  </script>
+</body>
+</html>
